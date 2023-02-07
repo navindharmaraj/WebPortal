@@ -11,6 +11,14 @@ var faqRouter = require('./route/faqRoute')
 
 var userCount = require('./controller/login_controller')
 
+var loginRouter = require('./route/loginRoute')
+var incidentRouter = require('./route/incidentRoute')
+var billRouter = require('./route/billRoute')
+var faqRouter = require('./route/faqRoute')
+
+var userCount = require('./controller/login_controller')
+
+
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
@@ -18,7 +26,11 @@ const io = new Server(server);
 
 io.on('connection', (socket)=> {
     console.log('a user connected');
+
+
     userCount.getUserCount();
+
+
     socket.on('disconnect',() => {
         console.log('user disconnected');
     })
@@ -56,6 +68,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 router.get("/", function (req, res) {
     res.sendFile(path + "/welcome.html");
 });
+
 router.get("/faq", function (req, res) {
     res.sendFile(path + "/faq.html");
 });
@@ -78,6 +91,7 @@ app.use("/webutil", loginRouter);
 app.use("/incident", incidentRouter);
 app.use("/bill", billRouter);
 app.use("/faq", faqRouter);
+
 server.listen(3000, function () {
     console.log("Live at Port 3000");
 });
