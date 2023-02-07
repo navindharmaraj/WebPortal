@@ -4,6 +4,12 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 var cors = require('cors');
 var path = __dirname + '/views';
+var loginRouter = require('./route/loginRoute')
+var incidentRouter = require('./route/incidentRoute')
+var billRouter = require('./route/billRoute')
+var faqRouter = require('./route/faqRoute')
+
+var userCount = require('./controller/login_controller')
 
 const http = require('http');
 const server = http.createServer(app);
@@ -12,6 +18,7 @@ const io = new Server(server);
 
 io.on('connection', (socket)=> {
     console.log('a user connected');
+    userCount.getUserCount();
     socket.on('disconnect',() => {
         console.log('user disconnected');
     })
@@ -49,19 +56,28 @@ app.use(bodyParser.urlencoded({ extended: false }))
 router.get("/", function (req, res) {
     res.sendFile(path + "/welcome.html");
 });
-
-
-
+router.get("/faq", function (req, res) {
+    res.sendFile(path + "/faq.html");
+});
+router.get("/eservice", function (req, res) {
+    res.sendFile(path + "/eservices.html");
+});
+router.get("/customer", function (req, res) {
+    res.sendFile(path + "/customer_dashboard.html");
+});
+router.get("/mybills", function (req, res) {
+    res.sendFile(path + "/mybills.html");
+});
+router.get("/incidentreport", function (req, res) {
+    res.sendFile(path + "/incidentReport.html");
+});
 
 app.use("/", router);
-// app.get("/addTwoNumbers", calculation.addition)//Function to add 2 numbers
-// app.post("/addition", calculation.n_addition)//Function to add n numbers
-// app.post("/subTwoNumbers", calculation.subtraction)//Function to subtract 2 numbers
-// app.put("/updateArray", calculation.updateArray)//Function to subtract 2 numbers
-// app.delete("/deleteArray", calculation.deleteArray)//Function to subtract 2 numbers
-// app.get('/api/projects',car.getCarCollection)
-// app.post('/api/projects',car.addCollection)
-
+app.use("/login", loginRouter);
+app.use("/webutil", loginRouter);
+app.use("/incident", incidentRouter);
+app.use("/bill", billRouter);
+app.use("/faq", faqRouter);
 server.listen(3000, function () {
     console.log("Live at Port 3000");
 });
