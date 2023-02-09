@@ -273,3 +273,31 @@ footer h5 {
     margin-bottom: 15px;
     padding-bottom: 5px;
   }
+  .tableAction {
+    font-size: 20px;
+    padding: 3px;
+    background: #00b789;
+    border-radius: 4px;
+    margin-right: 3px;
+    line-height: 14px;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+}
+.uactiondelete {
+    background: #e82c2c;
+}
+.datatable{
+    font-size: 14px;
+}
+.datatable .label{
+    background: #26a1ea;
+    padding: 1px 6px;
+    border-radius: 20px;
+    color: #ffffff;
+}
+.adduser{
+    margin-left:10px;
+    padding: 2px 3px;
+    font-size: 12px;
+}

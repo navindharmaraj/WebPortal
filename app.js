@@ -8,6 +8,8 @@ var loginRouter = require('./route/loginRoute')
 var incidentRouter = require('./route/incidentRoute')
 var billRouter = require('./route/billRoute')
 var faqRouter = require('./route/faqRoute')
+var userRouter = require('./route/userRoute')
+
 
 var userCount = require('./controller/login_controller')
 
@@ -71,6 +73,16 @@ router.get("/mybills", function (req, res) {
 router.get("/incidentreport", function (req, res) {
     res.sendFile(path + "/incidentReport.html");
 });
+router.get("/dummy", function (req, res) {
+    res.sendFile(path + "/dummy.html");
+});
+router.get("/admin", function (req, res) {
+    res.sendFile(path + "/admin_dashboard.html");
+});
+router.get("/customers", function (req, res) {
+    res.sendFile(path + "/customer.html");
+});
+
 
 app.use("/", router);
 app.use("/login", loginRouter);
@@ -78,6 +90,7 @@ app.use("/webutil", loginRouter);
 app.use("/incident", incidentRouter);
 app.use("/bill", billRouter);
 app.use("/faq", faqRouter);
+app.use("/adminpages", userRouter);
 server.listen(3000, function () {
     console.log("Live at Port 3000");
 });
