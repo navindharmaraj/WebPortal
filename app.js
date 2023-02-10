@@ -4,6 +4,11 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 var cors = require('cors');
 var path = __dirname + '/views';
+
+
+
+var userCount = require('./controller/login_controller')
+
 var loginRouter = require('./route/loginRoute')
 var incidentRouter = require('./route/incidentRoute')
 var billRouter = require('./route/billRoute')
@@ -20,7 +25,9 @@ const io = new Server(server);
 
 io.on('connection', (socket)=> {
     console.log('a user connected');
+
     userCount.getUserCount();
+
     socket.on('disconnect',() => {
         console.log('user disconnected');
     })
