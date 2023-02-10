@@ -91,6 +91,9 @@ app.use("/incident", incidentRouter);
 app.use("/bill", billRouter);
 app.use("/faq", faqRouter);
 app.use("/adminpages", userRouter);
+if(!module.parent){
 server.listen(3000, function () {
     console.log("Live at Port 3000");
 });
+}
+module.exports = server; // for testing

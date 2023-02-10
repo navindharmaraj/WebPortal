@@ -17,7 +17,7 @@ exports.checkIsValidUser = async function (req, res, nxt) {
         var password = req.body.password;
        
         var getUserData = await db.getUser(userName);
-     
+     console.log(getUserData)
         if (getUserData.length == 1) {
             
             if (getUserData[0].password == password) { await res.json({ statusCode: 200, data: getUserData[0], message: "Success" }) }
